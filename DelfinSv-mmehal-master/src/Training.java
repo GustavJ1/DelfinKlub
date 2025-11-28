@@ -1,31 +1,45 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
-public class Training {
-    private final File file;
+public class Training extends Member{
     Disciplin disciplin;
     LocalDate date;
 
-    public Training(File file) {
-        this.file = file;
+    public ArrayList<Member> competitiveMembers = new ArrayList<>();
+
+    public Training(){
+
     }
 
-   public void createTrainingFile() {
+    public void addTraining(Member member, LocalDate date, int placement) {
 
-        File currentTraining = new File("");
+        File currentTraining = new File("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/TrainingResults.txt");
 
         try {
-            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(currentTraining));
+            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(currentTraining, true));
 
-            Scanner userInput = new Scanner(System.in);
+            writeTrainingFile.write("Dato: ");
+            writeTrainingFile.write(String.valueOf(date));
+            writeTrainingFile.write(", MedlemsNr: ");
+            writeTrainingFile.write(String.valueOf(member.getMemberId()));
+            writeTrainingFile.write(", Stilling: ");
+            writeTrainingFile.write(String.valueOf(placement));
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
 
-            while ()  {
 
-
-
-
-            }
+            /*
+            Fil indhold: Dato, id, placering
+            Bufferedwriter
+            Hent memberlist
+            Random: Placement
+            Sort: Efter placering
+            write to file loop
+             */
+        writeTrainingFile.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -35,7 +49,7 @@ public class Training {
     public void readTrainingFile() {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader(file));
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/TrainingResults.txt)"));
             String line;
 
             while ((line = readTrainingFile.readLine()) != null) {
@@ -62,6 +76,6 @@ public class Training {
 
     @Override
     public String toString() {
-        return "SDSDSDSD";
+        return " ";
     }
 }

@@ -18,7 +18,6 @@ public class Member {
     public ArrayList<Member> members = new ArrayList<>();
 
     public Member(String cpr, String firstName, String lastName, Gender gender, int memberId) {
-        this.memberId = memberId;
         this.cpr = cpr;
         this.gender = gender;
         this.firstName = firstName;
@@ -26,10 +25,16 @@ public class Member {
         this.competitionSwimmer = false;
         this.active = true;
         this.squad = assignSquadByCpr();
+        this.memberId=memberId;
     }
+
 
     public Member() {
 
+    }
+
+    public int getMemberId(){
+        return this.memberId;
     }
 
     public int yearFromCpr() {
@@ -78,15 +83,16 @@ public class Member {
 
     public void memberListFileReader() {
         File file = new File("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/MemberList.txt");
-        int memberId = 0;
-
+        
         try {
             BufferedReader memberListReader = new BufferedReader(new FileReader(file));
             String line;
-
+            this.memberId =0;
             while ((line = memberListReader.readLine()) != null) {
 
                 memberId ++;
+
+
                 String[] parts = line.split(",");
                 String cpr = parts[0];
                 String firstName = parts[1];
@@ -94,8 +100,8 @@ public class Member {
                 Gender gender = Gender.valueOf(parts[3]);
 
                 Member member = new Member(cpr, firstName, lastName, gender, memberId);
-
                 members.add(member);
+
             }
             memberListReader.close();
         } catch (IOException e) {
