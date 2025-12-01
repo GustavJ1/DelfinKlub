@@ -1,8 +1,6 @@
 import java.io.*;
 import java.time.Period;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Member {
 
     private int memberId;
@@ -15,7 +13,7 @@ public class Member {
     public boolean active;
     private int squad;
 
-    public ArrayList<Member> members = new ArrayList<>();
+
 
     public Member(String cpr, String firstName, String lastName, Gender gender, int memberId) {
         this.cpr = cpr;
@@ -72,50 +70,17 @@ public class Member {
 
         if (age < 18) {
             squad = 1;
-        } else if (age >= 18) {
+        } else if (age > 60) {
             squad = 3;
 
-        } else if (age > 60) {
+        } else {
             squad = 5;
         }
         return squad;
     }
 
-    public void memberListFileReader() {
-        File file = new File("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/MemberList.txt");
-        
-        try {
-            BufferedReader memberListReader = new BufferedReader(new FileReader(file));
-            String line;
-            this.memberId =0;
-            while ((line = memberListReader.readLine()) != null) {
-
-                memberId ++;
 
 
-                String[] parts = line.split(",");
-                String cpr = parts[0];
-                String firstName = parts[1];
-                String lastName = parts[2];
-                Gender gender = Gender.valueOf(parts[3]);
-
-                Member member = new Member(cpr, firstName, lastName, gender, memberId);
-                members.add(member);
-
-            }
-            memberListReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void printMembers(){
-
-        for (Member m : members) {
-            System.out.println(m + "\n");
-        }
-
-    }
 
     @Override
     public String toString() {

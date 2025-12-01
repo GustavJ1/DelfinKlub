@@ -16,7 +16,7 @@ public class Training extends Member{
 
     public void addTraining(Member member, LocalDate date, int placement) {
 
-        File currentTraining = new File("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/TrainingResults.txt");
+        File currentTraining = new File("TrainingResults.txt");
 
         try {
             BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(currentTraining, true));
@@ -29,7 +29,6 @@ public class Training extends Member{
             writeTrainingFile.write(String.valueOf(placement));
             writeTrainingFile.write("\n");
             writeTrainingFile.flush();
-
 
             /*
             Fil indhold: Dato, id, placering
@@ -49,7 +48,7 @@ public class Training extends Member{
     public void readTrainingFile() {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:/Users/gusta/Downloads/DelfinSv-mmehal-master/DelfinSv-mmehal-master/TrainingResults.txt)"));
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("TrainingResults.txt)"));
             String line;
 
             while ((line = readTrainingFile.readLine()) != null) {
