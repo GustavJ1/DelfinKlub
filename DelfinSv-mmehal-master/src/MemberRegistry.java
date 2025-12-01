@@ -21,7 +21,7 @@ public class MemberRegistry {
             System.out.println(m + " ");
         }
     }
-
+// gør printmembers ikke det samme som showmembers? XD
     public void printMembers() {
 
         for (Member m : members) {
@@ -57,6 +57,9 @@ public class MemberRegistry {
             e.printStackTrace();
         }
     }
+    public void setArrears() {
+        this.yearlyRenewalStatus = false;
+    }
 
     public void checkYearlyRenewalStatus() {
         for (Member member : members) {
@@ -70,6 +73,9 @@ public class MemberRegistry {
             }
         }
     }
+
+
+
 
 
 }

@@ -5,6 +5,7 @@ public class Membership {
 
     Member member;
     private boolean yearlyRenewalStatus;
+
     public Membership(Member member) {
         this.member = member;
 
@@ -24,11 +25,6 @@ public class Membership {
         }
         return price;
     }
-
-    public void setArrears() {
-        this.yearlyRenewalStatus = false;
-    }
-
 
 
 
