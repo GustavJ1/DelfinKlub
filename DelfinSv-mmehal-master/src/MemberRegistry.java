@@ -10,6 +10,8 @@ public class MemberRegistry {
     public ArrayList<Member> members = new ArrayList<>();
     private boolean yearlyRenewalStatus;
     private int squad;
+    public List<Member> arrears = new ArrayList<>();
+    private boolean isArreas;
 
 
     public MemberRegistry() {
@@ -48,11 +50,16 @@ public class MemberRegistry {
                 String lastName = parts[2];
                 Gender gender = Gender.valueOf(parts[3]);
                 char competitionSwimmer = (parts[4].charAt(0));
+                boolean inArreas = false;
+                if (parts.length > 5) {
+                    inArreas = parts[5].equalsIgnoreCase("ALERT");
+                }
                 int memberId = id;
                 id++;
 
-                Member member = new Member(cpr, firstName, lastName, gender, memberId, competitionSwimmer);
+                Member member = new Member(cpr, firstName, lastName, gender, memberId, competitionSwimmer, inArreas);
                 members.add(member);
+
             }
             memberListReader.close();
         } catch (IOException e) {
@@ -60,21 +67,21 @@ public class MemberRegistry {
         }
     }
 
-    public void setArrears() {
-        this.yearlyRenewalStatus = false;
-    }
-
-    public void checkYearlyRenewalStatus() {
-        for (Member member : members) {
+    public void checkArreasStatus() {
+        System.out.println("Medlemmer der mangler betaling:");
+        for (Member m : members) {
 
 
-            if (yearlyRenewalStatus == false) {
-
-                List<Member> arrears = new ArrayList<>();
-
-                arrears.add(member);
+            if (m.inArreas) {
+                arrears.add(m);
+                System.out.println(m + "\n");
             }
+
+
+
         }
+
+
     }
 
 

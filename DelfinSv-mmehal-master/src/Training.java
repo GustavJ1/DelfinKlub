@@ -11,12 +11,9 @@ public class Training {
     int placement;
     Member member;
 
-    public ArrayList<Member> competitiveMembers = new ArrayList<>();
 
-    public Training(LocalDate date, int placement, Member member, Disciplin disciplin) {
+    public Training(LocalDate date) {
         this.date = date;
-        this.placement = placement;
-        this.member = member;
     }
 
 //    public void addTraining(Member member, LocalDate date, int placement) {
@@ -53,10 +50,12 @@ public class Training {
 public void readCrawl() {
 
     try {
-        BufferedReader readTrainingFile = new BufferedReader(new FileReader("Crawl.txt)"));
+        BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\Crawl.txt"));
         String line;
 
         while ((line = readTrainingFile.readLine()) != null) {
+
+
 
         }
         readTrainingFile.close();
@@ -71,7 +70,7 @@ public void readCrawl() {
     public void readBreastStroke() {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader("Breaststroke.txt)"));
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\Breaststroke.txt"));
             String line;
 
             while ((line = readTrainingFile.readLine()) != null) {
@@ -89,7 +88,7 @@ public void readCrawl() {
     public void readBackCraw() {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader("Backcrawl.txt)"));
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\Backcrawl.txt"));
             String line;
 
             while ((line = readTrainingFile.readLine()) != null) {
@@ -107,7 +106,7 @@ public void readCrawl() {
     public void readButterfly() {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader("Butterfly.txt)"));
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\Butterfly.txt"));
             String line;
 
             while ((line = readTrainingFile.readLine()) != null) {

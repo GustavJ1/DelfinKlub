@@ -1,6 +1,9 @@
 import java.io.*;
 import java.time.Period;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Member {
 
     public int memberId;
@@ -10,8 +13,11 @@ public class Member {
     private final String cpr;
     private char competitionSwimmer;
     public boolean active;
+    private boolean yearlyRenewalStatus;
+    MemberRegistry memberRegistry;
+    public boolean inArreas;
 
-    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer) {
+    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer, boolean inArreas) {
         this.cpr = cpr;
         this.gender = gender;
         this.firstName = firstName;
@@ -19,6 +25,7 @@ public class Member {
         this.competitionSwimmer = competitionSwimmer;
         this.active = true;
         this.memberId=memberId;
+        this.inArreas=inArreas;
     }
 
     public int getMemberId(){
@@ -56,6 +63,14 @@ public class Member {
     public char competitionSwimmer() {
         return competitionSwimmer;
     }
+
+    public void setinArrears(boolean inArreas) {
+        this.inArreas = inArreas;
+
+    }
+
+
+
 
 
     @Override
