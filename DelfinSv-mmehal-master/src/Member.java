@@ -3,32 +3,22 @@ import java.time.Period;
 import java.time.LocalDate;
 public class Member {
 
-    private int memberId;
+    public int memberId;
     private Gender gender;
     private String firstName;
     private String lastName;
     private String cpr;
-    private boolean competitionSwimmer;
-    private boolean membershipStatus;
+    private char competitionSwimmer;
     public boolean active;
-    private int squad;
 
-
-
-    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId) {
+    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer) {
         this.cpr = cpr;
         this.gender = gender;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.competitionSwimmer = false;
+        this.competitionSwimmer = competitionSwimmer;
         this.active = true;
-        this.squad = assignSquadByCpr();
         this.memberId=memberId;
-    }
-
-
-    public Member() {
-
     }
 
     public int getMemberId(){
@@ -38,7 +28,7 @@ public class Member {
     public int yearFromCpr() {
         int year = Integer.parseInt(cpr.substring(4, 6));
 
-        if (year > 30) {
+        if (year > 25) {
             year += 1900;
         } else {
             year += 2000;
@@ -48,7 +38,6 @@ public class Member {
 
     private int monthFromCpr() {
         return Integer.parseInt(cpr.substring(2, 4));
-
     }
 
     private int dayFromCpr() {
@@ -64,23 +53,9 @@ public class Member {
         return LocalDate.of(yearFromCpr(), monthFromCpr(), dayFromCpr());
     }
 
-    public int assignSquadByCpr() {
-        int squad = 0;
-        int age = getAge();
-
-        if (age < 18) {
-            squad = 1;
-        } else if (age > 60) {
-            squad = 3;
-
-        } else {
-            squad = 5;
-        }
-        return squad;
+    public char competitionSwimmer() {
+        return competitionSwimmer;
     }
-
-
-
 
     @Override
     public String toString() {

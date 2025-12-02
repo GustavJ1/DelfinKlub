@@ -4,3 +4,7 @@ Dato: 2025-12-01, MedlemsNr: 23, Stilling: 1
 Dato: 2025-12-01, MedlemsNr: 23, Stilling: 2
 Dato: 2025-12-01, MedlemsNr: 23, Stilling: 1
 Dato: 2025-12-01, MedlemsNr: 23, Stilling: 2
+Dato: 2025-12-02, MedlemsNr: 23, Stilling: 1
+Dato: 2025-12-02, MedlemsNr: 23, Stilling: 2
+Dato: 2025-12-02, MedlemsNr: 23, Stilling: 1
+Dato: 2025-12-02, MedlemsNr: 23, Stilling: 2
