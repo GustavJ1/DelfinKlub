@@ -1,5 +1,42 @@
-Mikael Phillipe,1
-Jørgen Leth,2
-Malthe Krebs,3
-Ida Lauritsen,4
-Mathias Hald,5
+01JAN25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
+28FEB25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
+30APR25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
+27JUN25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
+12AUG25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
+01DEC25
+Mikael,Phillipe,1
+Jørgen,Leth,2
+Malthe,Krebs,3
+Ida,Lauritsen,4
+Mathias,Hald,5
+-
