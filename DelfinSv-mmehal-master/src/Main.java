@@ -14,11 +14,10 @@ public class Main {
         System.out.println(membership.getPrice(member));
         System.out.println(memberRegistry.totalrevenue());
 
+        System.out.println("..............");
 
-        //  tr.addTraining(me, LocalDate.now(), 1);
-        //  tr.addTraining(me, LocalDate.now(), 2);
-
-
+        Training tr = new Training();
+        tr.readBackCrawl("30-04-2025");
     }
 
 }

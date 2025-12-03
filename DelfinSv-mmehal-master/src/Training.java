@@ -13,10 +13,8 @@ public class Training {
 
     public ArrayList<Member> competitiveMembers = new ArrayList<>();
 
-    public Training(LocalDate date, int placement, Member member, Disciplin disciplin) {
-        this.date = date;
-        this.placement = placement;
-        this.member = member;
+    public Training() {
+
     }
 
 //    public void addTraining(Member member, LocalDate date, int placement) {
@@ -86,17 +84,30 @@ public void readCrawl() {
         }
     }
 
-    public void readBackCraw() {
+    public void readBackCrawl(String date) {
 
         try {
-            BufferedReader readTrainingFile = new BufferedReader(new FileReader("Backcrawl.txt)"));
+            String regex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
+            String regex2 = "-";
             String line;
+
+            BufferedReader readTrainingFile = new BufferedReader(new FileReader("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\Backcrawl.txt"));
 
             while ((line = readTrainingFile.readLine()) != null) {
 
-            }
-            readTrainingFile.close();
+                if (line.equals(date) && date.matches(regex)) {
+                    System.out.println(line);
 
+                    while ((line = readTrainingFile.readLine()) != null) {
+                        System.out.println(line);
+
+                        if (line.equals(regex2)) {
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         } catch (FileNotFoundException e) {
             System.out.println("fil ikke fundet");
         } catch (IOException e) {
