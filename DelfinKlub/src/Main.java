@@ -14,6 +14,7 @@ public class Main {
         System.out.println("membership:" + membership);
         System.out.println(membership.getPrice(member));
         System.out.println(memberRegistry.totalrevenue());
+        System.out.println(1);
 
         System.out.println("..............");
 
