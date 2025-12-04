@@ -68,6 +68,10 @@ public class Member {
         this.inArreas = inArreas;
 
     }
+    // skal bruges til at sette medlem til IKKE at være active længere og gøre pris billigere
+    public void setActive(){
+        this.active=false;
+    }
 
 
 

@@ -38,7 +38,7 @@ public class MemberRegistry {
     }
 
     public void memberListFileReader() {
-        File file = new File("C:\\Users\\gusta\\IdeaProjects\\DelfinSv-mmehal-masterv2\\DelfinSv-mmehal-master\\MemberList.txt");
+        File file = new File("DelfinKlub/src/MemberList.txt");
         int id = 1;
 
         try {
@@ -68,6 +68,9 @@ public class MemberRegistry {
             e.printStackTrace();
         }
     }
+        public int getAmountOfMembers() {
+            return members.size();
+    }
 
     public void checkArreasStatus() {
         System.out.println("Medlemmer der mangler betaling:");
@@ -78,24 +81,18 @@ public class MemberRegistry {
                 arrears.add(m);
                 System.out.println(m + "\n");
             }
-
-
-
         }
-
-
     }
-    public double totalrevenue() {
+    public String totalrevenue() {
 
         double revenue = 0;
         for (Member m : members) {
             revenue += membership.getPrice(m);
-
-
         }
-        return revenue;
+
+        return "___________________________________________\n"
+                + "Total omsætning = " + revenue + " kr,-\n" +
+                "Total omsætning for " + getAmountOfMembers() + " medlemmer = " + " [" + revenue + " kr,-" + "]" + "\n" +
+                "___________________________________________\n";
     }
-
-
-
 }
