@@ -40,6 +40,7 @@ public class MemberRegistry {
     }
 
     public void memberListFileReader() {
+        members.clear();
         File file = new File("DelfinKlub/src/MemberList.txt");
         int id = 1;
 
@@ -109,9 +110,6 @@ public class MemberRegistry {
 
 
         }
-
-
-
     }
     public String totalrevenue() {
 

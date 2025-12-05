@@ -40,8 +40,6 @@ public class Training {
 
         Scanner sc = new Scanner(System.in);
 
-        try {
-
             for (int i = 0; i < 5; i++) {
 
                 System.out.println("Indtast MedlemsNr: ");
@@ -55,9 +53,6 @@ public class Training {
                 writeTrainingFile.write("\n");
                 writeTrainingFile.flush();
             }
-        } catch (InputMismatchException | NumberFormatException e) {
-            System.out.println("not valid");
-        }
             writeTrainingFile.write("-");
             sc.close();
     }
@@ -65,21 +60,21 @@ public class Training {
     public void readBackCrawl(String date) {
 
         try {
-            String regex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
-            String regex2 = "-";
+            String startRegex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
+            String stopRegex = "-";
             String line;
 
             BufferedReader readTrainingFile = new BufferedReader(new FileReader("DelfinKlub/src/Backcrawl.txt"));
 
             while ((line = readTrainingFile.readLine()) != null) {
 
-                if (line.equals(date) && date.matches(regex)) {
+                if (line.equals(date) && date.matches(startRegex)) {
                     System.out.println(line);
 
                     while ((line = readTrainingFile.readLine()) != null) {
                         System.out.println(line);
 
-                        if (line.equals(regex2)) {
+                        if (line.equals(stopRegex)) {
                             break;
                         }
                     }
@@ -95,21 +90,21 @@ public class Training {
     public void readCrawl(String date) {
 
         try {
-            String regex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
-            String regex2 = "-";
+            String startRegex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
+            String stopRegex = "-";
             String line;
 
             BufferedReader readTrainingFile = new BufferedReader(new FileReader("DelfinKlub/src/crawl.txt"));
 
             while ((line = readTrainingFile.readLine()) != null) {
 
-                if (line.equals(date) && date.matches(regex)) {
+                if (line.equals(date) && date.matches(startRegex)) {
                     System.out.println(line);
 
                     while ((line = readTrainingFile.readLine()) != null) {
                         System.out.println(line);
 
-                        if (line.equals(regex2)) {
+                        if (line.equals(stopRegex)) {
                             break;
                         }
                     }
@@ -126,21 +121,21 @@ public class Training {
     public void readBreastStroke(String date) {
 
         try {
-            String regex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
-            String regex2 = "-";
+            String startRegex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
+            String stopRegex = "-";
             String line;
 
             BufferedReader readTrainingFile = new BufferedReader(new FileReader("DelfinKlub/src/BreastStroke.txt"));
 
             while ((line = readTrainingFile.readLine()) != null) {
 
-                if (line.equals(date) && date.matches(regex)) {
+                if (line.equals(date) && date.matches(startRegex)) {
                     System.out.println(line);
 
                     while ((line = readTrainingFile.readLine()) != null) {
                         System.out.println(line);
 
-                        if (line.equals(regex2)) {
+                        if (line.equals(stopRegex)) {
                             break;
                         }
                     }
@@ -158,21 +153,21 @@ public class Training {
     public void readButterfly(String date) {
 
         try {
-            String regex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
-            String regex2 = "-";
+            String startRegex = "(0?[1-9]|[12][0-9]|3[01])[/|-](0?[1-9]|1[0-2])[/|-][0-9]{4}";
+            String stopRegex = "-";
             String line;
 
             BufferedReader readTrainingFile = new BufferedReader(new FileReader("DelfinKlub/src/ButterFly.txt"));
 
             while ((line = readTrainingFile.readLine()) != null) {
 
-                if (line.equals(date) && date.matches(regex)) {
+                if (line.equals(date) && date.matches(startRegex)) {
                     System.out.println(line);
 
                     while ((line = readTrainingFile.readLine()) != null) {
                         System.out.println(line);
 
-                        if (line.equals(regex2)) {
+                        if (line.equals(stopRegex)) {
                             break;
                         }
                     }

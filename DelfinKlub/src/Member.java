@@ -1,7 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Period;
 import java.time.LocalDate;
 import java.util.List;
@@ -75,8 +74,6 @@ public class Member {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public void setInArrears(boolean inArrears) {
@@ -84,8 +81,7 @@ public class Member {
 
     }
 
-    public void paidArrears(int iD) throws IOException {
-
+    public void paidArrears(int iD) {
         Path fileSource = Path.of("DelfinKlub/src/temparrears.txt");
         Path fileDestination = Path.of("DelfinKlub/src/Arrears.txt");
 
@@ -106,21 +102,17 @@ public class Member {
             bw.close();
             File oldFiles = new File("DelfinKlub/src/Arrears.txt");
             oldFiles.delete();
+            Files.move(fileSource, fileDestination);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-            Files.move(fileSource, fileDestination);
     }
 
     // skal bruges til at sette medlem til IKKE at være active længere og gøre pris billigere
     public void setActive(){
         this.active=false;
     }
-
-
-
-
 
     @Override
     public String toString() {
