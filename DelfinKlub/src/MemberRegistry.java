@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,14 +54,12 @@ public class MemberRegistry {
                 String lastName = parts[2];
                 Gender gender = Gender.valueOf(parts[3]);
                 char competitionSwimmer = (parts[4].charAt(0));
-                boolean inArreas = false;
-                if (parts.length > 5) {
-                    inArreas = parts[5].equalsIgnoreCase("ALERT");
-                }
+
+
                 int memberId = id;
                 id++;
 
-                Member member = new Member(cpr, firstName, lastName, gender, memberId, competitionSwimmer, inArreas);
+                Member member = new Member(cpr, firstName, lastName, gender, memberId, competitionSwimmer);
                 members.add(member);
 
             }
@@ -68,20 +68,50 @@ public class MemberRegistry {
             e.printStackTrace();
         }
     }
-        public int getAmountOfMembers() {
+    public int getAmountOfMembers() {
             return members.size();
     }
 
-    public void checkArreasStatus() {
+    public Member memberFromId(int Id) {
+        return members.get(Id);
+    }
+
+    public void checkArrearsStatus() {
+        arrears.clear();
+        try {
+            List<String> lines = Files.readAllLines(
+                    Path.of("DelfinKlub/src/Arrears.txt")
+            );
+
+            for (String line : lines) {
+                int memberId = Integer.parseInt(line);
+                Member m = memberFromId(memberId-1);
+                if (m != null) {
+                    m.setInArrears(true);
+                }
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         System.out.println("Medlemmer der mangler betaling:");
+
+
         for (Member m : members) {
 
 
-            if (m.inArreas) {
+            if (m.inArrears) {
                 arrears.add(m);
                 System.out.println(m + "\n");
             }
+
+
         }
+
+
+
     }
     public String totalrevenue() {
 

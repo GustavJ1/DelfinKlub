@@ -1,4 +1,7 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Period;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,9 +18,9 @@ public class Member {
     public boolean active;
     private boolean yearlyRenewalStatus;
     MemberRegistry memberRegistry;
-    public boolean inArreas;
+    public boolean inArrears;
 
-    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer, boolean inArreas) {
+    public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer) {
         this.cpr = cpr;
         this.gender = gender;
         this.firstName = firstName;
@@ -25,7 +28,7 @@ public class Member {
         this.competitionSwimmer = competitionSwimmer;
         this.active = true;
         this.memberId=memberId;
-        this.inArreas=inArreas;
+        this.inArrears=inArrears;
     }
 
     public int getMemberId(){
@@ -64,10 +67,40 @@ public class Member {
         return competitionSwimmer;
     }
 
-    public void setinArrears(boolean inArreas) {
-        this.inArreas = inArreas;
+    public void setArrears(int iD) {
+        File arrearsFile = new File("DelfinSv-mmehal-master/src/Arrears.txt");
+        try{
+            BufferedWriter writeArrearsFile = new BufferedWriter(new FileWriter(arrearsFile, true));
+            writeArrearsFile.write(iD+""+"\n");
+            writeArrearsFile.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
+
+    public void setInArrears(boolean inArrears) {
+        this.inArrears = inArrears;
+
+    }
+
+    public void paidArrears(int iD) {
+        try {
+            List<String> lines = Files.readAllLines(Path.of("DelfinKlub/src/Arrears.txt"));
+            String idLine = Files.readAllLines(Paths.get("DelfinKlub/src/Arrears.txt")).get(iD);
+
+            for (int i = 0; i < lines.size(); i++){
+                if (lines.get(i).equals(idLine)){
+                    lines.remove(i);
+                    i++;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // skal bruges til at sette medlem til IKKE at være active længere og gøre pris billigere
     public void setActive(){
         this.active=false;

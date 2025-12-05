@@ -52,11 +52,11 @@ public class Training {
             int placement = sc.nextInt();
             writeTrainingFile.write("" + placement);
             writeTrainingFile.write("\n");
-            writeTrainingFile.write("-");
             writeTrainingFile.flush();
 
-            sc.close();
         }
+            writeTrainingFile.write("-");
+            sc.close();
     }
 
     public void readBackCrawl(String date) {

@@ -6,20 +6,17 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Working directory: " + new File(".").getAbsolutePath());
         Membership membership = new Membership();
-        Member member= new Member("1010901010","gustav","jantzen",Gender.MAN,1,'k',false);
-        MemberRegistry memberRegistry = new MemberRegistry(membership);
-        memberRegistry.memberListFileReader();
-        memberRegistry.showMembers();
-        memberRegistry.checkArreasStatus();
-        System.out.println("membership:" + membership);
-        System.out.println(membership.getPrice(member));
-        System.out.println(memberRegistry.totalrevenue());
-        System.out.println(1);
+        Member member= new Member("1010901010","gustav","jantzen",Gender.MAN,1,'k');
 
-        System.out.println("..............");
 
-        Training tr = new Training();
-        tr.readBackCrawl("30-04-2025");
+
+
+        Membership ms = new Membership();
+        MemberRegistry mr = new MemberRegistry(ms);
+        mr.memberListFileReader();
+        mr.checkArrearsStatus();
+        member.paidArrears(1);
+
     }
 
 }
