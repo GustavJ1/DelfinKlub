@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +67,33 @@ public class MemberRegistry {
             e.printStackTrace();
         }
     }
+    public void removeMember(int id) {
+        Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
+        Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
+        Member rmember = memberFromId(id - 1);
+        rmember.paidArrears(rmember.getMemberId());
+        String memberLine = rmember.getCpr() + "," + rmember.getFirstName() + "," + rmember.getLastName() + "," + rmember.stringFromGender() + "," + rmember.getCompSwimmerString();
+        try {
+            List<String> lines = Files.readAllLines(fileDestination);
+
+            lines.removeIf(s -> s.equals(memberLine));
+
+            File newFile = new File("DelfinKlub/src/tempmembers.txt");
+            newFile.createNewFile();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("DelfinKlub/src/tempmembers.txt"));
+            for (String line : lines){
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            Files.move(fileSource, fileDestination, StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        memberListFileReader();
+    }
     public int getAmountOfMembers() {
             return members.size();
     }
@@ -91,24 +116,18 @@ public class MemberRegistry {
                     m.setInArrears(true);
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
         System.out.println("Medlemmer der mangler betaling:");
 
-
         for (Member m : members) {
-
 
             if (m.inArrears) {
                 arrears.add(m);
                 System.out.println(m + "\n");
             }
-
-
         }
     }
     public String totalrevenue() {

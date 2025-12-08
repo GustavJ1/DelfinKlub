@@ -15,7 +15,7 @@ public class Training {
 
     }
 
-    public void addTraining(LocalDate date) {
+    public void addBackCrawl(LocalDate date) { // BackCrawl
 
         File backCrawl = new File("DelfinKlub/src/Backcrawl.txt");
 
@@ -35,6 +35,70 @@ public class Training {
             throw new RuntimeException(e);
         }
     }
+
+    public void addBreastStroke(LocalDate date) { // BreastStroke
+
+        File backCrawl = new File("DelfinKlub/src/Breaststroke.txt");
+
+        try {
+            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(backCrawl, true));
+
+            writeTrainingFile.write("Dato: ");
+            writeTrainingFile.write(String.valueOf(date));
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
+
+            trainingInfo(writeTrainingFile);
+
+            writeTrainingFile.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addButterfly(LocalDate date) { //Butterfly
+
+        File backCrawl = new File("DelfinKlub/src/Butterfly.txt");
+
+        try {
+            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(backCrawl, true));
+
+            writeTrainingFile.write("Dato: ");
+            writeTrainingFile.write(String.valueOf(date));
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
+
+            trainingInfo(writeTrainingFile);
+
+            writeTrainingFile.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addCrawl(LocalDate date) {
+
+        File backCrawl = new File("DelfinKlub/src/Crawl.txt");
+
+        try {
+            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(backCrawl, true));
+
+            writeTrainingFile.write("Dato: ");
+            writeTrainingFile.write(String.valueOf(date));
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
+
+            trainingInfo(writeTrainingFile);
+
+            writeTrainingFile.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private static void trainingInfo(BufferedWriter writeTrainingFile) throws IOException {
 

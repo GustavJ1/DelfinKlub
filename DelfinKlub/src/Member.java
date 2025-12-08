@@ -26,7 +26,18 @@ public class Member {
         this.competitionSwimmer = competitionSwimmer;
         this.active = true;
         this.memberId=memberId;
-        this.inArrears=inArrears;
+    }
+
+    public String getCompSwimmerString(){
+        if (this.competitionSwimmer == 'T' ){
+            return "T";
+        } else return "K";
+    }
+
+    public String stringFromGender() {
+        if (this.gender == Gender.MAN) {
+            return "MAN";
+        } else return "WOMAN";
     }
 
     public int getMemberId(){
@@ -109,6 +120,18 @@ public class Member {
         }
     }
 
+    public String getCpr() {
+        return cpr;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     // skal bruges til at sette medlem til IKKE at være active længere og gøre pris billigere
     public void setActive(){
         this.active=false;
@@ -118,4 +141,6 @@ public class Member {
     public String toString() {
         return lastName + ", " + firstName + ". Medlems Nr: " + memberId + ", " + (competitionSwimmer == 'K' ? "Konkurrence Svømmer" : "Fritids Svømmer");
     }
+
+
 }

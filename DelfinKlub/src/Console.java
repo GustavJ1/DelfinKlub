@@ -1,6 +1,82 @@
-public class Console {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
+public class Console {
+    Member member;
+    MemberRegistry memberRegistry;
+    Training training;
+    Membership membership;
+    Scanner sc = new Scanner(System.in);
+    boolean running = true;
+
+    public void Program() {
+
+        while (running) {
+
+
+            System.out.println("Velkommen til Delfin Club");
+            System.out.println("Tast 1 for [Coach] \nTast 2 for [Formand] \nTast 3 for [Kasserer]");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("Tast 1 for at indskrive træningsresultater\n" +
+                            "Tast 2 for indskrive konkurrenceresultater \n" +
+                            "Tast 3 for at se træningsresultater");
+
+                    int choices = sc.nextInt();
+
+                    if (choices == 1) {
+                        System.out.println("Enter date (yyyy-MM-dd)");
+                        String input = sc.nextLine();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                        try {
+                            LocalDate myDate = LocalDate.parse(input, formatter);
+                            training.readBackCrawl(myDate.toString());
+
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    } else if (choices == 2) {
+
+                    } else if (choices == 3) {
+                        System.out.println("""
+                                Hvad vil du se resultater for?\s
+                                [1] Backcrawl
+                                [2] Breaststroke
+                                [3] Butterfly
+                                [4] Crawl""");
+
+                        int chooseFile = sc.nextInt();
+                        if (chooseFile == 1) {
+                            System.out.println("Vælg dato");
+                            training.readBackCrawl(sc.nextLine());
+                        }
+                    }
+
+                    break;
+
+                case 2:
+
+
+                    break;
+                case 0:
+                    System.out.println("programmet afsluttet");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("ugyldigt valg");
+                    break;
+            }
+
+
+        }
+    }
 }
+/*                 */
 
 /* Scanner start menu - "velkommen til Delfin Club
 Coach / Formand / Kasserer

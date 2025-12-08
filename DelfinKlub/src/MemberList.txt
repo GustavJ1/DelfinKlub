@@ -20,8 +20,6 @@
 3007945233,Joakim,Eskildsen,MAN,K
 2209093371,Simon,Bech,MAN,T
 0410015013,Timothy,Casilagan,MAN,K
-0210842233,Gustav,Jantzen,MAN,T
-1502031123,Anders,Lund,MAN,K
 2107992244,Sofie,Jensen,WOMAN,T
 3105083355,Martin,Skov,MAN,T
 0206904466,Julie,Andersen,WOMAN,K
