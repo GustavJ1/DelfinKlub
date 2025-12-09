@@ -10,22 +10,7 @@ public class Main {
         MemberRegistry m=new MemberRegistry(membership);
         m.memberListFileReader();
         System.out.println(".......");
-
-      console.program();
-
-
-
-
-
-
-
-
-
-
-        //console.program();
-
-        //mr.removeMember(1203041234);
-
+        System.out.println(m.totalrevenue());
     }
 
 }

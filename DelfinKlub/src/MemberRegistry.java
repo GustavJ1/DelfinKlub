@@ -104,6 +104,11 @@ public class MemberRegistry {
         return members.get(Id);
     }
 
+    // skal bruges til at sette medlem til IKKE at være active længere og gøre pris billigere
+    public void setActive(){
+        member.active=false;
+    }
+
     public void checkArrearsStatus() {
         for (Member m : members) {
             m.setInArrears(false);
@@ -145,7 +150,7 @@ public class MemberRegistry {
 
         return "___________________________________________\n"
                 + "Total omsætning = " + revenue + " kr,-\n" +
-                "Total omsætning for " + getAmountOfMembers() + " medlemmer = " + " [" + revenue + " kr,-" + "]" + "\n" +
+                "Antal medlemmer: " + getAmountOfMembers() +"\n"+
                 "___________________________________________\n";
     }
 }

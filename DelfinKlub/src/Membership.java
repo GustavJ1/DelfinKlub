@@ -4,7 +4,6 @@ import java.util.List;
 public class Membership {
     MemberRegistry memberRegistry;
     Member member;
-    private boolean yearlyRenewalStatus;
     Membership membership;
 
     public Membership() {
@@ -29,7 +28,7 @@ public class Membership {
 
 
 
-    @Override
+    @Override // ligegyldig toString?
     public String toString() {
         return " ";
     }
