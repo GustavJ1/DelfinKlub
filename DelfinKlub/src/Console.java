@@ -3,15 +3,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Console {
-    Member member;
-    MemberRegistry memberRegistry;
     Training training;
-    Membership membership;
+    Membership membership=new Membership();
     Scanner sc = new Scanner(System.in);
     boolean running = true;
+    MemberRegistry mr= new MemberRegistry(membership);
 
-    public void Program() {
 
+    public void program() {
+        mr.memberListFileReader();
         while (running) {
 
 
@@ -56,8 +56,7 @@ public class Console {
                             String date = sc.nextLine();
                             training.readBackCrawl(date);
 
-                        }
-                        else if (chooseFile==2){
+                        } else if (chooseFile == 2) {
                             System.out.println("vælg dato");
                             //training.readBreastStroke(sc.nextLine());
                         }
@@ -67,7 +66,30 @@ public class Console {
 
                 case 2:
 
+                    System.out.println("""
+                             hvad vil du gøre nu?\s
+                             [1] tilføje medlem
+                             [2] fjerne medlem
+                             [3] se alle medlemmer""");
 
+                        choice=sc.nextInt();
+                        if (choice==1){
+                            System.out.println("det virker");
+                            //skal lave metode til addmember()?
+                        }
+                        else if (choice==2){
+                            System.out.println("vælg medlemsID du vil fjerne");
+                            int removeMember = sc.nextInt();
+                            mr.removeMember(removeMember);
+
+                        }
+                        else if (choice==3){
+
+                            mr.memberListFileReader();
+                            mr.showMembers(); //virker, viser medlemmer skal også være en tom linje inden break
+                            sc.nextLine();
+
+                        }
                     break;
                 case 0:
                     System.out.println("programmet afsluttet");

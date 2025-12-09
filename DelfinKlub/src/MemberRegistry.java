@@ -16,7 +16,7 @@ public class MemberRegistry {
 
 
     public MemberRegistry(Membership membership) {
-        this.membership=membership;
+        this.membership = membership;
 
     }
 
@@ -67,12 +67,13 @@ public class MemberRegistry {
             e.printStackTrace();
         }
     }
+
     public void removeMember(int id) {
         Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
         Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
-        Member rmember = memberFromId(id - 1);
-        rmember.paidArrears(rmember.getMemberId());
-        String memberLine = rmember.getCpr() + "," + rmember.getFirstName() + "," + rmember.getLastName() + "," + rmember.stringFromGender() + "," + rmember.getCompSwimmerString();
+        Member rm = memberFromId(id - 1);
+        rm.paidArrears(rm.getMemberId());
+        String memberLine = rm.getCpr() + "," + rm.getFirstName() + "," + rm.getLastName() + "," + rm.stringFromGender() + "," + rm.getCompSwimmerString();
         try {
             List<String> lines = Files.readAllLines(fileDestination);
 
@@ -81,7 +82,7 @@ public class MemberRegistry {
             File newFile = new File("DelfinKlub/src/tempmembers.txt");
             newFile.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter("DelfinKlub/src/tempmembers.txt"));
-            for (String line : lines){
+            for (String line : lines) {
                 bw.write(line);
                 bw.newLine();
             }
@@ -94,8 +95,9 @@ public class MemberRegistry {
         }
         memberListFileReader();
     }
+
     public int getAmountOfMembers() {
-            return members.size();
+        return members.size();
     }
 
     public Member memberFromId(int Id) {
@@ -103,17 +105,22 @@ public class MemberRegistry {
     }
 
     public void checkArrearsStatus() {
+        for (Member m : members) {
+            m.setInArrears(false);
+        }
         arrears.clear();
         try {
             List<String> lines = Files.readAllLines(
-                    Path.of("DelfinKlub/src/Arrears.txt")
-            );
+                    Path.of("DelfinKlub/src/Arrears.txt"));
 
             for (String line : lines) {
-                int memberId = Integer.parseInt(line);
-                Member m = memberFromId(memberId-1);
+                if (line.trim().isEmpty()) continue;
+
+                int memberId = Integer.parseInt(line.trim());
+                Member m = memberFromId(memberId);
                 if (m != null) {
                     m.setInArrears(true);
+                    arrears.add(m);
                 }
             }
         } catch (IOException e) {
@@ -122,14 +129,13 @@ public class MemberRegistry {
 
         System.out.println("Medlemmer der mangler betaling:");
 
-        for (Member m : members) {
+        for (Member m : arrears) {
 
-            if (m.inArrears) {
-                arrears.add(m);
-                System.out.println(m + "\n");
-            }
+            System.out.println(m + "\n");
+
         }
     }
+
     public String totalrevenue() {
 
         double revenue = 0;

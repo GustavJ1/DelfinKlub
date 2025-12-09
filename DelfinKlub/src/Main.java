@@ -7,10 +7,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Membership membership = new Membership();
         Console console = new Console();
-        Member member = new Member("1010901010", "gustav", "jantzen", Gender.MAN, 1, 'k');
+        MemberRegistry m=new MemberRegistry(membership);
+        m.memberListFileReader();
+        System.out.println(".......");
 
-       console.Program();
+      console.program();
 
+
+
+
+
+
+
+
+
+
+        //console.program();
+
+        //mr.removeMember(1203041234);
 
     }
 
