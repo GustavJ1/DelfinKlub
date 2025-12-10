@@ -1,21 +1,15 @@
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Console {
-
-
     Member member;
     Membership membership = new Membership();
     MemberRegistry mr= new MemberRegistry(membership);
-    Training training = new Training();
-
-
+    Event event = new Event();
 
     public void Program() {
-    Scanner sc = new Scanner(System.in);
-    boolean running = true;
+        Scanner sc = new Scanner(System.in);
+        boolean running = true;
         mr.memberListFileReader();
 
         while (running) {
@@ -54,24 +48,24 @@ public class Console {
                         if (disciplin == 1) {
                             System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
                             LocalDate date = LocalDate.parse(sc.next());
-                            training.addBackCrawl(date);
+                            event.eventDate("DelfinKlub/src/Backcrawl.txt", date);
                         }
                         if (disciplin == 2) {
                             System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
                             LocalDate date = LocalDate.parse(sc.next());
-                            training.addCrawl(date);
+                            event.eventDate("DelfinKlub/src/crawl.txt", date);
                         }
 
                         if (disciplin == 3) {
                             System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
                             LocalDate date = LocalDate.parse(sc.next());
-                            training.addButterfly(date);
+                            event.eventDate("DelfinKlub/src/Breaststroke.txt", date);
                         }
 
                         if (disciplin == 4) {
                             System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
                             LocalDate date = LocalDate.parse(sc.next());
-                            training.addBreastStroke(date);
+                            event.eventDate("DelfinKlub/src/ButterFly.txt", date);
                         }
                     }
 
@@ -86,10 +80,10 @@ public class Console {
                         System.out.println("↓");
                         LocalDate date = LocalDate.parse(sc.next());
 
-                        training.readBackCrawl(String.valueOf(date));
-                        training.readCrawl(String.valueOf(date));
-                        training.readBreastStroke(String.valueOf(date));
-                        training.readButterfly(String.valueOf(date));
+                        event.readEvent(String.valueOf(date),"DelfinKlub/src/Backcrawl.txt");
+                        event.readEvent(String.valueOf(date),"DelfinKlub/src/crawl.txt");
+                        event.readEvent(String.valueOf(date),"DelfinKlub/src/Breaststroke.txt");
+                        event.readEvent(String.valueOf(date),"DelfinKlub/src/ButterFly.txt");
                     }
                     break;
                 case 2:
@@ -148,6 +142,7 @@ public class Console {
         }
     }
 }
+
 
 
 /*

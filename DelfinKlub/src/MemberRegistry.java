@@ -66,6 +66,46 @@ public class MemberRegistry {
         }
     }
 
+        public void addMember(Member member) {
+            Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
+            Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
+
+            Member m =(member);
+            m.paidArrears(m.getMemberId());
+
+            String memberLine = m.getCpr() + "," + m.getFirstName() + "," + m.getLastName() + "," + m.stringFromGender() + "," + m.getCompSwimmerString();
+
+            try {
+
+                List<String> lines = Files.readAllLines(fileDestination);
+
+
+                if (!lines.contains(memberLine)) {
+                    lines.add(memberLine);
+                }
+
+
+                File newFile = new File("DelfinKlub/src/tempmembers.txt");
+                newFile.createNewFile();
+                BufferedWriter bw = new BufferedWriter(new FileWriter(newFile));
+                for (String line : lines) {
+                    bw.write(line);
+                    bw.newLine();
+                }
+                bw.flush();
+                bw.close();
+
+
+                Files.move(fileSource, fileDestination, StandardCopyOption.REPLACE_EXISTING);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
     public void removeMember(int id) {
         Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
         Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
