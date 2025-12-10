@@ -2,12 +2,11 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Console {
-    Member member;
     Membership membership = new Membership();
     MemberRegistry mr= new MemberRegistry(membership);
     Event event = new Event();
 
-    public void Program() {
+    public void program() {
         Scanner sc = new Scanner(System.in);
         boolean running = true;
         mr.memberListFileReader();
@@ -96,8 +95,17 @@ public class Console {
 
                     choice = sc.nextInt();
                     if (choice == 1) {
-                        System.out.println("det virker");
-                        //skal lave metode til addmember()?
+                        String cpr= sc.nextLine();
+                        String name=sc.nextLine();
+                        String lastname=sc.nextLine();
+                        Gender gender= Gender.valueOf(sc.nextLine());
+                        int memberid=sc.nextInt();
+                        char comp= (char) sc.nextInt();
+                        boolean active= sc.nextBoolean();
+
+                        System.out.println();
+                        //mr.addMember(new Member());virker ikke
+
                     } else if (choice == 2) {
                         System.out.println("vælg medlemsID du vil fjerne");
                         int removeMember = sc.nextInt();

@@ -15,6 +15,7 @@ public class MemberRegistry {
     Membership membership;
 
 
+
     public MemberRegistry(Membership membership) {
         this.membership = membership;
     }
@@ -67,6 +68,7 @@ public class MemberRegistry {
     }
 
         public void addMember(Member member) {
+        memberListFileReader();
             Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
             Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
 

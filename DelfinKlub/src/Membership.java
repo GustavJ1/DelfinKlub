@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Membership {
-    MemberRegistry memberRegistry;
-    Member member;
-    Membership membership;
 
     public Membership() {
 

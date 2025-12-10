@@ -9,8 +9,9 @@ public class Main {
         MemberRegistry m = new MemberRegistry(membership);
         m.memberListFileReader();
         Console console = new Console();
+        console.program();
         System.out.println(m.totalrevenue());
-        m.addMember(new Member("1010001999", "ja", "da", Gender.MAN, 45, 'k', true));
+        //m.addMember(new Member("1010991010", "sylvester", "stalone", Gender.MAN, 10, 'k', true));
     }
 
 }
