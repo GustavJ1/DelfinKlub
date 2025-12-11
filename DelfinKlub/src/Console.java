@@ -1,7 +1,9 @@
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Console {
+    Member member;
     Membership membership = new Membership();
     MemberRegistry mr= new MemberRegistry(membership);
     Event event = new Event();
@@ -24,67 +26,50 @@ public class Console {
             switch (scInput) {
 
                 case 1:
-
                     System.out.print("""
-                                        [1] - Indskrivning af træningsresultater: \s
-                                        [2] - Indskrivning af konkurrenceresultater:
-                                        [3] - Se træningsresultater:
+                                        [1] - Indskrivning af trænings-resultater: \s
+                                        [2] - Indskrivning af tidligere trænings-resultater:
+                                        [3] - Indskrivning af konkurrenceresultater:
+                                        [4] - Se træningsresultater:
                                      """);
                     int choice = sc.nextInt();
 
                     // tilføj trænings-resultater
                     if (choice == 1) {
+                        System.out.println("Disciplin (TAG HØJDE FOR CAPS");
+                        Disciplin disciplin = Disciplin.valueOf(sc.next());
+                        event.eventDate(disciplin, "DelfinKlub/src/Training.txt");
+                        System.out.println("Træningen er hermed tilføjet");
+                    }
 
-                        System.out.print(""" 
-                                   Disciplines \s
-                                   [1] - BackCrawl
-                                   [2] - Crawl
-                                   [3] - Butterfly
-                                   [4] - Breaststroke
-                                """);
-                        int disciplin = sc.nextInt();
+                    if (choice == 2) {
+                        System.out.println("Disciplin (TAG HØJDE FOR CAPS");
+                        Disciplin disciplin = Disciplin.valueOf(sc.next());
 
-                        if (disciplin == 1) {
-                            System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
-                            LocalDate date = LocalDate.parse(sc.next());
-                            event.eventDate("DelfinKlub/src/Backcrawl.txt", date);
-                        }
-                        if (disciplin == 2) {
-                            System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
-                            LocalDate date = LocalDate.parse(sc.next());
-                            event.eventDate("DelfinKlub/src/crawl.txt", date);
-                        }
+                        System.out.println("Indtast dato for pågældende trænings-resultater (yyyy-MM-dd)");
+                        System.out.println("↓");
 
-                        if (disciplin == 3) {
-                            System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
-                            LocalDate date = LocalDate.parse(sc.next());
-                            event.eventDate("DelfinKlub/src/Breaststroke.txt", date);
-                        }
-
-                        if (disciplin == 4) {
-                            System.out.println("Indtast træningens dato (yyyy-MM-dd): ");
-                            LocalDate date = LocalDate.parse(sc.next());
-                            event.eventDate("DelfinKlub/src/ButterFly.txt", date);
-                        }
+                        LocalDate date = LocalDate.parse(sc.next());
+                        event.manuallyEnterEventDate(date, disciplin, "DelfinKlub/src/Training.txt");
+                        System.out.println("Træningen fra en tidligere dato er hermed tilføjet");
                     }
 
                     // Indskriv konkurrence-resultater
-                    if (choice == 2) {
+                    if (choice == 3) {
                         System.out.print("Konkurrence Resultater");
                     }
 
                     // Se trænings-resultater
-                    if (choice == 3) {
+                    if (choice == 4) {
                         System.out.println("Indtast dato for pågældende trænings-resultater (yyyy-MM-dd)");
                         System.out.println("↓");
                         LocalDate date = LocalDate.parse(sc.next());
 
-                        event.readEvent(String.valueOf(date),"DelfinKlub/src/Backcrawl.txt");
-                        event.readEvent(String.valueOf(date),"DelfinKlub/src/crawl.txt");
-                        event.readEvent(String.valueOf(date),"DelfinKlub/src/Breaststroke.txt");
-                        event.readEvent(String.valueOf(date),"DelfinKlub/src/ButterFly.txt");
+                        event.readEvent(String.valueOf(date),"DelfinKlub/src/Training.txt");
                     }
+
                     break;
+
                 case 2:
 
                     System.out.println("""
@@ -95,17 +80,8 @@ public class Console {
 
                     choice = sc.nextInt();
                     if (choice == 1) {
-                        String cpr= sc.nextLine();
-                        String name=sc.nextLine();
-                        String lastname=sc.nextLine();
-                        Gender gender= Gender.valueOf(sc.nextLine());
-                        int memberid=sc.nextInt();
-                        char comp= (char) sc.nextInt();
-                        boolean active= sc.nextBoolean();
-
-                        System.out.println();
-                        //mr.addMember(new Member());virker ikke
-
+                        System.out.println("det virker");
+                        //skal lave metode til addmember()?
                     } else if (choice == 2) {
                         System.out.println("vælg medlemsID du vil fjerne");
                         int removeMember = sc.nextInt();
@@ -122,9 +98,9 @@ public class Console {
                 case 3: // Kasserers tool (økonomi)
                     System.out.println("""
                             Du kan nu vælge følgende \s
-                            Tast [1] Se Total Revenue
-                            Tast [2] Se Medlemmer i Restance
-                            Tast [3] Se specifik medlem kontigent""");
+                                 [1] Se Total Revenue
+                                 [2] Se Medlemmer i Restance
+                                 [3] Se specifik medlem kontigent""");
                     int revchoice = sc.nextInt();
                     if (revchoice == 1) {
                         System.out.println(mr.totalrevenue());

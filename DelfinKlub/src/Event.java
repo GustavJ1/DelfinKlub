@@ -1,4 +1,5 @@
 import java.io.*;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -14,26 +15,45 @@ public class Event {
         for (int i = 0; i < 5; i++) {
 
             System.out.println("Indtast MedlemsNr: ");
+            System.out.println("↓");
             int memberId = sc.nextInt();
             writeTrainingFile.write(memberId + ",");
 
             System.out.println("Indtast placering");
+            System.out.println("↓");
             int placement = sc.nextInt();
             writeTrainingFile.write("" + placement);
             writeTrainingFile.write("\n");
         }
-        writeTrainingFile.write("-");
-        writeTrainingFile.write("\n");
-        writeTrainingFile.flush();
+
+        System.out.println("Vil du tilføje flere discipliner for dagens træning (ja/nej)");
+        System.out.println("↓");
+        String input = sc.next();
+
+        if (Objects.equals(input, "ja")) {
+            writeTrainingFile.flush();
+
+            System.out.println("Disciplin: ");
+            System.out.println("↓");
+            Disciplin disciplin = Disciplin.valueOf(sc.next().toUpperCase());
+
+            writeTrainingFile.write(String.valueOf(disciplin));
+            writeTrainingFile.write("\n");
+            eventInfo(writeTrainingFile);
+        } else {
+            writeTrainingFile.write("-");
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
+        }
     }
 
-
-    public void eventDate(String pathname, LocalDate date) {
+    public void eventDate(Disciplin disciplin, String pathname) {
         File filePath = new File(pathname);
 
         try {
             BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(filePath, true));
-            writeTrainingFile.write(String.valueOf(date));
+            writeTrainingFile.write(LocalDate.now() + "\n");
+            writeTrainingFile.write(String.valueOf(disciplin));
             writeTrainingFile.write("\n");
             writeTrainingFile.flush();
 
@@ -46,23 +66,23 @@ public class Event {
         }
     }
 
-    public void addBackCrawl(LocalDate date) { // BackCrawl
-        eventDate("DelfinKlub/src/Backcrawl.txt", date);
-    }
+    public void manuallyEnterEventDate(LocalDate date, Disciplin disciplin, String pathname) {
+        File filePath = new File(pathname);
 
-    public void addBreastStroke(LocalDate date) { // BreastStroke
+        try {
+            BufferedWriter writeTrainingFile = new BufferedWriter(new FileWriter(filePath, true));
+            writeTrainingFile.write((date + "\n"));
+            writeTrainingFile.write(String.valueOf(disciplin));
+            writeTrainingFile.write("\n");
+            writeTrainingFile.flush();
 
-        eventDate("DelfinKlub/src/Breaststroke.txt", date);
-    }
+            eventInfo(writeTrainingFile);
 
-    public void addButterfly(LocalDate date) { //Butterfly
+            writeTrainingFile.close();
 
-        eventDate("DelfinKlub/src/Butterfly.txt", date);
-    }
-
-    public void addCrawl(LocalDate date) {
-
-        eventDate("DelfinKlub/src/Crawl.txt", date);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void readEvent(String date, String filePath) {
@@ -82,7 +102,7 @@ public class Event {
                 while ((line = readTrainingFile.readLine()) != null) {
 
                     if (line.equals(date)) {
-                        System.out.println(filePath + " resultater " + " - " + date + ":");
+                        System.out.println(filePath + " resultater " + "- " + date + ":");
 
                         while ((line = readTrainingFile.readLine()) != null) {
 
@@ -99,22 +119,6 @@ public class Event {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void readBackCrawl(String date) {
-        readEvent(date,"DelfinKlub/src/Backcrawl.txt");
-    }
-
-    public void readCrawl(String date) {
-        readEvent(date, "DelfinKlub/src/crawl.txt");
-    }
-
-    public void readBreastStroke(String date) {
-        readEvent(date,"DelfinKlub/src/Breaststroke.txt");
-    }
-
-    public void readButterfly(String date) {
-        readEvent(date,"DelfinKlub/src/ButterFly.txt");
     }
 
     @Override
