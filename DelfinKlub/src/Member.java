@@ -86,7 +86,7 @@ public class Member {
         File arrearsFile = new File("DelfinKlub/src/Arrears.txt");
         try{
             BufferedWriter writeArrearsFile = new BufferedWriter(new FileWriter(arrearsFile, true));
-            writeArrearsFile.write(iD+""+"\n");
+            writeArrearsFile.write(iD-1+""+"\n");
             writeArrearsFile.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -105,7 +105,7 @@ public class Member {
         try {
             List<String> lines = Files.readAllLines(fileDestination);
 
-            String idRemoval = String.valueOf(iD);
+            String idRemoval = String.valueOf(iD-1);
             lines.removeIf(s -> s.equals(idRemoval));
 
             File newFile = new File("DelfinKlub/src/temparrears.txt");

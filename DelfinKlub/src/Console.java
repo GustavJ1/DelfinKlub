@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Console {
-    Member member;
     Membership membership = new Membership();
     MemberRegistry mr = new MemberRegistry(membership);
     Event event = new Event();
@@ -86,7 +85,7 @@ public class Console {
                     sc.nextLine();
 
                     switch (subChoice) {
-                        case 1 -> addMemberUI();
+                        case 1 -> addMember();
                         case 2 -> { //fjerner medlem
                             System.out.println("Indtast medlemID du vil fjerne");
                             int removeMember = sc.nextInt();
@@ -148,7 +147,7 @@ public class Console {
         }
     }
 
-    public void addMemberUI() {
+    public void addMember() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Indtast CPR (ddMMyyxxxx);");
