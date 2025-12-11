@@ -8,7 +8,7 @@ public class Console {
     Membership membership = new Membership();
     MemberRegistry mr = new MemberRegistry(membership);
     Event event = new Event();
-    Member m = new Member("1010001010", "Medlem", "Medlemsen", Gender.MAN, 0, 'k', true);
+
 
     public void program() {
         Scanner sc = new Scanner(System.in);
@@ -121,15 +121,15 @@ public class Console {
                     } else if (revchoice == 3) {
 
                         System.out.println("[1] Tilføj medlem til restance\n" +
-                                "[2] fjern medlem fra restance");
+                                           "[2] fjern medlem fra restance");
                         int Cchoice = sc.nextInt();
                         if (Cchoice == 1) {
                             System.out.println("Vælg medlemsID");
-                            m.setArrears(sc.nextInt());
+                            mr.setArrears(sc.nextInt());
                             System.out.println("restance er nu Tilføjet");
                         } else if (Cchoice == 2) {
                             System.out.println("Vælg medlemsID");
-                            m.paidArrears(sc.nextInt());
+                            mr.paidArrears(sc.nextInt());
                             System.out.println("restance er nu Fjernet");
                         }
                     }

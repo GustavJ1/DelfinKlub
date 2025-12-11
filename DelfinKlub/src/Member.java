@@ -14,9 +14,8 @@ public class Member {
     private final String cpr;
     private char competitionSwimmer;
     public boolean active;
-    private boolean yearlyRenewalStatus;
-    MemberRegistry memberRegistry;
-    public boolean inArrears;
+
+
 
     public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer, boolean active) {
         this.cpr = cpr;
@@ -35,9 +34,6 @@ public class Member {
         if (this.competitionSwimmer == 'T' ){
             return "T";
         } else return "K";
-    }
-    public boolean getActive(){
-        return this.active;
     }
 
     public String stringFromGender() {
@@ -76,54 +72,6 @@ public class Member {
 
     private LocalDate getBirthday() {
         return LocalDate.of(yearFromCpr(), monthFromCpr(), dayFromCpr());
-    }
-
-    public char competitionSwimmer() {
-        return competitionSwimmer;
-    }
-
-    public void setArrears(int iD) {
-        File arrearsFile = new File("DelfinKlub/src/Arrears.txt");
-        try{
-            BufferedWriter writeArrearsFile = new BufferedWriter(new FileWriter(arrearsFile, true));
-            writeArrearsFile.write(iD-1+""+"\n");
-            writeArrearsFile.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void setInArrears(boolean inArrears) {
-        this.inArrears = inArrears;
-
-    }
-
-    public void paidArrears(int iD) {
-        Path fileSource = Path.of("DelfinKlub/src/temparrears.txt");
-        Path fileDestination = Path.of("DelfinKlub/src/Arrears.txt");
-
-        try {
-            List<String> lines = Files.readAllLines(fileDestination);
-
-            String idRemoval = String.valueOf(iD-1);
-            lines.removeIf(s -> s.equals(idRemoval));
-
-            File newFile = new File("DelfinKlub/src/temparrears.txt");
-            newFile.createNewFile();
-            BufferedWriter bw = new BufferedWriter(new FileWriter("DelfinKlub/src/temparrears.txt"));
-            for (String line : lines){
-                bw.write(line);
-                bw.newLine();
-            }
-            bw.flush();
-            bw.close();
-            File oldFiles = new File("DelfinKlub/src/Arrears.txt");
-            oldFiles.delete();
-            Files.move(fileSource, fileDestination);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public String getCpr() {

@@ -9,6 +9,7 @@ public class MemberRegistry {
     public ArrayList<Member> members = new ArrayList<>();
     public List<Member> arrears = new ArrayList<>();
     Membership membership;
+    public boolean inArrears;
 
 
     public MemberRegistry(Membership membership) {
@@ -77,7 +78,7 @@ public class MemberRegistry {
         Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
         Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
         Member rm = memberFromId(id - 1);
-        rm.paidArrears(rm.getMemberId());
+        paidArrears(rm.getMemberId());
         String memberLine = rm.getCpr() + "," + rm.getFirstName() + "," + rm.getLastName() + "," + rm.stringFromGender() + "," + rm.getCompSwimmerString();
         try {
             List<String> lines = Files.readAllLines(fileDestination);
@@ -112,7 +113,7 @@ public class MemberRegistry {
     // tjekker for arreas txt filen og giver output tilbage med folk der " mangler betaling"
     public void checkArrearsStatus() {
         for (Member m : members) {
-            m.setInArrears(false);
+            setInArrears(false);
         }
         arrears.clear();
         try {
@@ -125,7 +126,7 @@ public class MemberRegistry {
                 int memberId = Integer.parseInt(line.trim());
                 Member m = memberFromId(memberId);
                 if (m != null) {
-                    m.setInArrears(true);
+                    setInArrears(true);
                     arrears.add(m);
                 }
             }
@@ -139,6 +140,50 @@ public class MemberRegistry {
 
             System.out.println(m + "\n");
 
+        }
+    }
+
+    public void setArrears(int iD) {
+        File arrearsFile = new File("DelfinKlub/src/Arrears.txt");
+        try {
+            BufferedWriter writeArrearsFile = new BufferedWriter(new FileWriter(arrearsFile, true));
+            writeArrearsFile.write(iD - 1 + "" + "\n");
+            writeArrearsFile.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setInArrears(boolean inArrears) {
+        this.inArrears = inArrears;
+
+    }
+
+    public void paidArrears(int iD) {
+        Path fileSource = Path.of("DelfinKlub/src/temparrears.txt");
+        Path fileDestination = Path.of("DelfinKlub/src/Arrears.txt");
+
+        try {
+            List<String> lines = Files.readAllLines(fileDestination);
+
+            String idRemoval = String.valueOf(iD - 1);
+            lines.removeIf(s -> s.equals(idRemoval));
+
+            File newFile = new File("DelfinKlub/src/temparrears.txt");
+            newFile.createNewFile();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("DelfinKlub/src/temparrears.txt"));
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+            File oldFiles = new File("DelfinKlub/src/Arrears.txt");
+            oldFiles.delete();
+            Files.move(fileSource, fileDestination);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
