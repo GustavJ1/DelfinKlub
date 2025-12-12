@@ -23,7 +23,6 @@ public class MemberRegistry {
         }
     }
 
-
     public void memberListFileReader() {
         members.clear();
         File file = new File("DelfinKlub/src/MemberList.txt");
@@ -77,9 +76,9 @@ public class MemberRegistry {
     public void removeMember(int id) {
         Path fileSource = Path.of("DelfinKlub/src/tempmembers.txt");
         Path fileDestination = Path.of("DelfinKlub/src/MemberList.txt");
-        Member rm = memberFromId(id - 1);
+        Member rm = memberFromId(id);
         paidArrears(rm.getMemberId());
-        String memberLine = rm.getCpr() + "," + rm.getFirstName() + "," + rm.getLastName() + "," + rm.stringFromGender() + "," + rm.getCompSwimmerString();
+        String memberLine = rm.getCpr() + "," + rm.getFirstName() + "," + rm.getLastName() + "," + rm.stringFromGender() + "," + rm.getCompSwimmerString() + "," + rm.isActive();
         try {
             List<String> lines = Files.readAllLines(fileDestination);
 
@@ -107,7 +106,7 @@ public class MemberRegistry {
     }
 
     public Member memberFromId(int Id) {
-        return members.get(Id);
+        return members.get(Id-1);
     }
 
     // tjekker for arreas txt filen og giver output tilbage med folk der " mangler betaling"

@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Membership {
 
     public Membership() {
@@ -9,7 +6,7 @@ public class Membership {
 
     public double getPrice(Member member) {
         double price = 500;
-        if (member.active) {
+        if (member.isActive()) {
             int age = member.getAge();
             if (age >= 60) {
                 price = 1600 * 0.75;

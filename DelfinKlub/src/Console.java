@@ -1,13 +1,11 @@
-import com.sun.jdi.Value;
-
+import java.io.File;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.InputMismatchException;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Console {
+    Competition competition = new Competition();
     Membership membership = new Membership();
     MemberRegistry mr = new MemberRegistry(membership);
     Event event = new Event();
@@ -36,20 +34,27 @@ public class Console {
                                [2] - Indskrivning af tidligere trænings-resultater:
                                [3] - Indskrivning af konkurrenceresultater:
                                [4] - Se træningsresultater:
+                               [5] - Se konkurrenceresultater:
                             """);
                     int choice = sc.nextInt();
 
                     // tilføj trænings-resultater
-                    if (choice == 1) {
-                        System.out.println("Disciplin");
-                        Disciplin disciplin = Disciplin.valueOf(sc.next().toUpperCase(Locale.ROOT));
-                        event.eventDate(disciplin, "DelfinKlub/src/Training.txt");
-                        System.out.println("Træningen er hermed tilføjet");
+                    try {
+                        if (choice == 1) {
+                            System.out.println("Vælg mellem [Crawl, Backcrawl, Breaststroke, Butterfly]");
+                            Disciplin disciplin = Disciplin.valueOf(sc.next().toUpperCase(Locale.ROOT));
+                            event.eventDate(disciplin, "DelfinKlub/src/Training.txt");
+                            System.out.println("Træningen er hermed tilføjet");
+                        }
+                    } catch (IllegalArgumentException e) {
+
+                        System.out.println("Ugyldigt input - vælg: [Crawl] [Backcrawl] [Breaststroke] [Butterfly]");
+                        continue;
                     }
 
                     if (choice == 2) {
                         try {
-                            System.out.println("Disciplin");
+                            System.out.println("Vælg mellem [Crawl, Backcrawl, Breaststroke, Butterfly]");
 
                             Disciplin disciplin = Disciplin.valueOf(sc.next().toUpperCase(Locale.ROOT));
 
@@ -67,7 +72,7 @@ public class Console {
 
                     // Indskriv konkurrence-resultater
                     if (choice == 3) {
-                        System.out.print("Konkurrence Resultater");
+                        competition.writeCompFile();
                     }
 
                     // Se trænings-resultater
@@ -79,6 +84,20 @@ public class Console {
                         event.readEvent(String.valueOf(date), "DelfinKlub/src/Training.txt");
                     }
 
+                    // Se konkurrence-resultater
+                    if (choice == 5) {
+                        System.out.println("Indtast dato for pågældende konkurrence-resultater (yyyy-MM-dd)");
+                        System.out.println("↓");
+                        LocalDate date = LocalDate.parse(sc.next());
+                        System.out.println("Indtast Disciplin du kunne tænke dig at se resultater for: ");
+                        System.out.println("↓");
+                        String disciplin = sc.next();
+                        System.out.println("Indtast Aldersgruppe: (Senior/Junior)");
+                        System.out.println("↓");
+                        String ageGroup = sc.next();
+
+                        competition.readCompetitionFile(String.valueOf(date),disciplin, ageGroup, new File("DelfinKlub/src/Competition.txt"));
+                    }
                     break;
 
                 case 2:
@@ -180,8 +199,6 @@ public class Console {
         int memberId = mr.getAmountOfMembers() + 1;
 
         Member newMember = new Member(cpr, firstName, lastName, gender, memberId, competitionSwimmer, active);
-
-        mr.members.add(newMember);
 
         mr.addMember(newMember);
 

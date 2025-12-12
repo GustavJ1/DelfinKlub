@@ -1,21 +1,16 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Period;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Member {
 
-    public int memberId;
+    private final int memberId;
     private final Gender gender;
     private String firstName;
     private String lastName;
     private final String cpr;
     private char competitionSwimmer;
-    public boolean active;
-
-
+    private boolean active;
 
     public Member(String cpr, String firstName, String lastName, Gender gender, int memberId, char competitionSwimmer, boolean active) {
         this.cpr = cpr;
@@ -28,6 +23,10 @@ public class Member {
     }
     public boolean isActive(){
         return active;
+    }
+
+    public boolean isCompetitionSwimmer() {
+        return competitionSwimmer == 'K';
     }
 
     public String getCompSwimmerString(){
@@ -85,8 +84,6 @@ public class Member {
     public String getLastName() {
         return lastName;
     }
-
-
 
     @Override
     public String toString() {
